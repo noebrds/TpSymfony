@@ -9,19 +9,19 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/sandbox/prefix', name: 'sandbox_prefix')]
 final class PrefixController extends AbstractController
 {
-    #[Route('/sandbox/prefix', name: 'sandbox_prefix')]
+    #[Route('', name: '')]
     public function indexAction(): Response
     {
         return new Response("<body>Hello world!</body>");
     }
 
-    #[Route('/sandbox/prefix/hello2', name: 'sandbox_prefix_hello2')]
+    #[Route('/hello2', name: '_hello2')]
     public function hello2Action(): Response
     {
         return $this->render('Sandbox/Prefix/hello2.html.twig');
     }
 
-    #[Route('/sandbox/prefix/hello3', name: 'sandbox_prefix_hello3')]
+    #[Route('/hello3', name: '_hello3')]
     public function hello3Action(): Response
     {
         $args = array(
@@ -31,7 +31,7 @@ final class PrefixController extends AbstractController
         return $this->render('Sandbox/Prefix/hello3.html.twig', $args);
     }
 
-    #[Route('/sandbox/prefix/hello4', name: 'sandbox_prefix_hello4')]
+    #[Route('/hello4', name: 's_hello4')]
     public function hello4Action(): Response
     {
         $args = array(
