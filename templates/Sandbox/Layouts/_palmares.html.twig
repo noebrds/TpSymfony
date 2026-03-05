@@ -1,0 +1,6 @@
+<h2>Les {{ products|length }} produits les plus chers</h2>
+<ul>
+    {% for product in products %}
+        <li>{{ product.productName }} : {{ product.price }} euro(s)</li>
+    {% endfor %}
+</ul>
