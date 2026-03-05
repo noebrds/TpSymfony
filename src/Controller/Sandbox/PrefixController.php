@@ -31,7 +31,7 @@ final class PrefixController extends AbstractController
         return $this->render('Sandbox/Prefix/hello3.html.twig', $args);
     }
 
-    #[Route('/hello4', name: 's_hello4')]
+    #[Route('/hello4', name: '_hello4')]
     public function hello4Action(): Response
     {
         $args = array(

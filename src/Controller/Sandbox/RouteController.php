@@ -5,6 +5,8 @@ namespace App\Controller\Sandbox;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/sandbox/route', name: 'sandbox_route')]
@@ -133,4 +135,42 @@ final class RouteController extends AbstractController
         );
         return $this->render("Sandbox/Route/test4Bis.html.twig", $args);
     }
+
+    #[Route('/permis/{age}',
+    name: "_permis",
+    requirements: [
+        'age' => '[1-9]\d{0,1}'
+        ])]
+    public function permisAction(int $age): Response
+    {
+        if($age < 17){
+            throw new NotFoundHttpException("Vous n'êtes pas assez agé");
+        }
+
+        return new Response("<body>Route:permis : âge = " . $age . " (&ge; 17 )</body>");
+    }
+
+    #[Route('/redirect1', name: '_redirect1')]
+    public function redirect1Action(): Response{
+        return $this->redirectToRoute("sandbox_prefix_hello2");
+    }
+
+    #[Route('/redirect2', name: '_redirect2')]
+    public function redirect2Action(): Response{
+        $args = array(
+            "year"=> "2005",
+            "month"=> "05",
+            "filename"=> "testfile",
+        );
+        return $this->redirectToRoute("sandbox_route_test3", $args);
+    }
+
+    #[Route('/redirect3', name: '_redirect3')]
+    public function redirect3Action(): Response{
+        dump("Hello world");
+        return $this->redirectToRoute("sandbox_prefix_hello2");
+    }
+
+
+
 }
